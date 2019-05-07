@@ -123,7 +123,7 @@ const Question = (question, reRender) => {
           <div>
             <input type="radio" name={question.formName} 
               onClick={() => applyAnswer(question, answer, reRender)}/> 
-            {answer.text}
+            <span class="answer-text">{answer.text}</span>
           </div>
         ))}
       </form>
