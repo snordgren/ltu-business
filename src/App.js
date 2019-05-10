@@ -130,7 +130,7 @@ const Question = (question, reRender, questionIndex) => {
           <div>
             <input type="radio" name={"question-num-" + questionIndex} 
               onClick={() => applyAnswer (question, answer, reRender, questionIndex)}/> 
-            {answer.text}
+            <span>{answer.text}</span>
           </div>
         ))}
       </form>
