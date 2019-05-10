@@ -24,37 +24,37 @@ const sumObjects = ix => {
 
 const generateData = values => [
   {
-    subject: 'Tillväxtstarka ägare', A: sumObjects(0), fullMark: max,
+    subject: 'Tillväxtstarka ägare', A: sumObjects(0)
   },
   {
-    subject: 'Tillväxtfinansiering', A: sumObjects(1), fullMark: max,
+    subject: 'Tillväxtfinansiering', A: sumObjects(1)
   },
   {
-    subject: 'Tillväxtutrymmet', A: sumObjects(2), fullMark: max,
+    subject: 'Tillväxtutrymmet', A: sumObjects(2)
   },
   {
-    subject: 'Tidsmonopolet', A: sumObjects(3), fullMark: max,
+    subject: 'Tidsmonopolet', A: sumObjects(3)
   },
   {
-    subject: 'Fokus', A: sumObjects(4), fullMark: max,
+    subject: 'Fokus', A: sumObjects(4)
   },
   {
-    subject: 'Marknadsskapande', A: sumObjects(5), fullMark: max,
+    subject: 'Marknadsskapande', A: sumObjects(5)
   },
   {
-    subject: 'Internationell kraft', A: sumObjects(6), fullMark: max,
+    subject: 'Internationell kraft', A: sumObjects(6)
   },
   {
-    subject: 'Dynamisk effektivitet', A: sumObjects(7), fullMark: max,
+    subject: 'Dynamisk effektivitet', A: sumObjects(7)
   },
   {
-    subject: 'Hårdmjuka stårning', A: sumObjects(8), fullMark: max,
+    subject: 'Hårdmjuka stårning', A: sumObjects(8)
   },
   {
-    subject: 'Tältorganisation', A: sumObjects(9), fullMark: max,
+    subject: 'Tältorganisation', A: sumObjects(9)
   },
   {
-    subject: 'Tillväxtledarskapet', A: sumObjects(10), fullMark: max,
+    subject: 'Tillväxtledarskapet', A: sumObjects(10)
   },
   {
     subject: 'Ledningskraften', A: sumObjects(11)
@@ -65,7 +65,6 @@ const questions = [
   {
     title: 'Är era ägare långsiktiga "företagsbyggare"?',
     subjectIndex: 0,
-    formName: 'q0',
     answers: [
       {
         text: 'Ja, erfaren ägare av att bygga tillväxtbolag (= förstår vad framtiden kräver)',
@@ -83,8 +82,7 @@ const questions = [
   },
   {
     title: 'Är era ägare långsiktiga "företagsbyggare"?',
-    subjectIndex: 1,
-    formName: 'q1',
+    subjectIndex: 0,
     answers: [
       {
         text: 'Ja, erfaren ägare av att bygga tillväxtbolag (= förstår vad framtiden kräver)',
@@ -103,26 +101,26 @@ const questions = [
 ];
 
 // Applies 
-const applyAnswer = (question, answer, reRender) => {
+const applyAnswer = (question, answer, reRender, questionIndex) => {
   const previous = values[question.subjectIndex];
   const toUse = (previous) ? previous : {};
   if (!previous) {
     values[question.subjectIndex] = toUse;
   }
-  toUse[answer.formName] = answer.score;
+  toUse[questionIndex] = answer.score;
   console.log(values);
   reRender();
 };
 
-const Question = (question, reRender) => {
+const Question = (question, reRender, questionIndex) => {
   return (
     <div>
       <h2>{question.title}</h2>
       <form className="question-form">
         {question.answers.map(answer => (
           <div>
-            <input type="radio" name={question.formName} 
-              onClick={() => applyAnswer(question, answer, reRender)}/> 
+            <input type="radio" name={"question-num-" + questionIndex} 
+              onClick={() => applyAnswer(question, answer, reRender, questionIndex)}/> 
             {answer.text}
           </div>
         ))}
@@ -135,7 +133,7 @@ function App(reRender) {
   return (
     <div>
       <h1>LTU Business</h1>
-      {questions.map(question => Question(question, reRender))}
+      {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
       <Chart />
     </div>
   )
