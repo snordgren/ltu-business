@@ -5,6 +5,7 @@ import {
 
 const max = 10;
 const values = {};
+let answerCount = 0;
 
 const sumObjects = ix => {
   const defaultValue = 1;
@@ -104,10 +105,16 @@ const questions = [
 const applyAnswer = (question, answer, reRender, questionIndex) => {
   const previous = values[question.subjectIndex];
   const toUse = (previous) ? previous : {};
+
   if (!previous) {
     values[question.subjectIndex] = toUse;
   }
+
+  if (!toUse [questionIndex]) {
+    answerCount += 1;
+  }
   toUse[questionIndex] = answer.score;
+
   console.log(values);
   reRender();
 };
@@ -134,7 +141,7 @@ function App(reRender) {
     <div>
       <h1>LTU Business</h1>
       {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
-      <Chart />
+      {(answerCount === questions.length) && <Chart />}
     </div>
   )
 }
