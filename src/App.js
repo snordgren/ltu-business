@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis
 } from 'recharts';
+import { ProgressBar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const max = 10;
 const values = {};
@@ -110,7 +112,7 @@ const applyAnswer = (question, answer, reRender, questionIndex) => {
     values[question.subjectIndex] = toUse;
   }
 
-  if (!toUse [questionIndex]) {
+  if (!toUse[questionIndex]) {
     answerCount += 1;
   }
   toUse[questionIndex] = answer.score;
@@ -127,7 +129,7 @@ const Question = (question, reRender, questionIndex) => {
         {question.answers.map(answer => (
           <div>
             <input type="radio" name={"question-num-" + questionIndex} 
-              onClick={() => applyAnswer(question, answer, reRender, questionIndex)}/> 
+              onClick={() => applyAnswer (question, answer, reRender, questionIndex)}/> 
             {answer.text}
           </div>
         ))}
@@ -140,6 +142,7 @@ function App(reRender) {
   return (
     <div>
       <h1>LTU Business</h1>
+      <ProgressBar now={1 + 100 * answerCount / questions.length} />
       {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
       {(answerCount === questions.length) && <Chart />}
     </div>
