@@ -3,27 +3,11 @@ import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis
 } from 'recharts';
 import { ProgressBar } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import questions from './questions';
 
 const max = 10;
 const values = {};
 let answerCount = 0;
-
-const sumObjects = ix => {
-  const defaultValue = 1;
-  const obj = values[ix];
-
-  if (!obj) {
-    values[ix] = {};
-    return defaultValue;
-  }
-
-  let result = defaultValue;  
-  Object.values(obj).forEach(value => {
-    result += value;
-  });
-  return result;
-};
 
 const generateData = values => [
   {
@@ -64,44 +48,21 @@ const generateData = values => [
   }
 ];
 
-const questions = [
-  {
-    title: 'Är era ägare långsiktiga "företagsbyggare"?',
-    subjectIndex: 0,
-    answers: [
-      {
-        text: 'Ja, erfaren ägare av att bygga tillväxtbolag (= förstår vad framtiden kräver)',
-        score: 3
-      },
-      {
-        text: 'Vissa, men de är ej i majoritet',
-        score: 2,
-      },
-      {
-        text: 'Nej, ägandet kortsiktigt, "exitfokus"',
-        score: 1
-      }
-    ]
-  },
-  {
-    title: 'Är era ägare långsiktiga "företagsbyggare"?',
-    subjectIndex: 0,
-    answers: [
-      {
-        text: 'Ja, erfaren ägare av att bygga tillväxtbolag (= förstår vad framtiden kräver)',
-        score: 3
-      },
-      {
-        text: 'Vissa, men de är ej i majoritet',
-        score: 2,
-      },
-      {
-        text: 'Nej, ägandet kortsiktigt, "exitfokus"',
-        score: 1
-      }
-    ]
+const sumObjects = ix => {
+  const defaultValue = 1;
+  const obj = values[ix];
+
+  if (!obj) {
+    values[ix] = {};
+    return defaultValue;
   }
-];
+
+  let result = defaultValue;
+  Object.values(obj).forEach(value => {
+    result += value;
+  });
+  return result;
+};
 
 // Applies 
 const applyAnswer = (question, answer, reRender, questionIndex) => {
@@ -123,13 +84,13 @@ const applyAnswer = (question, answer, reRender, questionIndex) => {
 
 const Question = (question, reRender, questionIndex) => {
   return (
-    <div>
-      <h2>{question.title}</h2>
+    <div className="question-container">
+      <h2 className="question-title">{question.title}</h2>
       <form className="question-form">
         {question.answers.map(answer => (
           <div>
-            <input type="radio" name={"question-num-" + questionIndex} 
-              onClick={() => applyAnswer (question, answer, reRender, questionIndex)}/> 
+            <input type="radio" name={"question-num-" + questionIndex}
+              onClick={() => applyAnswer(question, answer, reRender, questionIndex)} />
             <span>{answer.text}</span>
           </div>
         ))}
@@ -140,12 +101,22 @@ const Question = (question, reRender, questionIndex) => {
 
 function App(reRender) {
   return (
-    <div>
-      <h1>LTU Business</h1>
-      <ProgressBar now={1 + 100 * answerCount / questions.length} />
-      {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
-      {(answerCount === questions.length) && <Chart />}
-    </div>
+    <>
+      <h1 className="ltu-business-title">LTU Business</h1>
+      <div className="progress-container">
+        <ProgressBar
+          now={5 + 95 * answerCount / questions.length}
+          label={answerCount + "/" + questions.length} />
+      </div>
+      <div className="question-col">
+        {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
+        {<Chart />}
+      </div>
+      <footer>
+        <div>Copyright &copy; 2019</div>
+        <div>Martin, Mattias, Ruslan, Seán, Silas, Valdemar vid LTU</div>
+      </footer>
+    </>
   )
 }
 
@@ -155,14 +126,16 @@ function Chart() {
   var height = 2.5 * radius;
 
   return (
-    <RadarChart outerRadius={radius} width={width} height={height} 
-      data={generateData(values)} >
+    <div className="chart-container">
+      <RadarChart outerRadius={radius} width={width} height={height}
+        data={generateData(values)} >
 
-      <PolarGrid />
-      <PolarRadiusAxis domain={[0, max]} />
-      <PolarAngleAxis dataKey="subject" />
-      <Radar name="Result" dataKey="A" stroke="#7874c8" fill="#8884d8" fillOpacity={0.8} />
-    </RadarChart>
+        <PolarGrid />
+        <PolarRadiusAxis domain={[0, max]} />
+        <PolarAngleAxis dataKey="subject" />
+        <Radar name="Result" dataKey="A" stroke="#7874c8" fill="#8884d8" fillOpacity={0.8} />
+      </RadarChart>
+    </div>
   );
 }
 

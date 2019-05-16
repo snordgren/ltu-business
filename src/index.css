@@ -17,7 +17,78 @@ h1 {
   font-weight: 300;
 }
 
+.question-container {
+  max-width: 512px;
+  margin: 30px 8px 0 8px;
+  padding: 8px;
+}
+
 form.question-form {
   display: flex;
   flex-direction: column;
+}
+
+html, body {
+  background-color: #083258;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#root {
+  color: white;
+  min-height: 100%; 
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ltu-business-title {
+  padding: 8px;
+}
+
+.progress-container {
+  width: 100%;
+  padding: 0 8px 0 8px;
+  margin-bottom: 30px;
+}
+
+.question-title {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+footer {
+  padding: 8px;
+  text-align: center;
+}
+
+.question-col {
+  width: 100%;
+  background-color: #0F508A;
+}
+
+.chart-container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+/* .recharts-surface is chart background */
+.recharts-surface {
+  height: 100%;
+}
+
+.recharts-wrapper, .chart-container, .recharts-surface {
+  width: 100%;
+  max-width: 100vw;
+  max-height: 100vw;
 }
