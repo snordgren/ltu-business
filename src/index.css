@@ -18,9 +18,10 @@ h1 {
 }
 
 .question-container {
-  max-width: 512px;
+  max-width: 768px;
   margin: 30px 8px 0 8px;
   padding: 8px;
+  width: 100%;
 }
 
 form.question-form {
@@ -28,7 +29,7 @@ form.question-form {
   flex-direction: column;
 }
 
-html, body {
+html, body {  
   background-color: #083258;
   min-height: 100%;
 }
@@ -55,7 +56,7 @@ body {
 .progress-container {
   width: 100%;
   padding: 0 8px 0 8px;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 
 .question-title {
@@ -68,12 +69,15 @@ input[type="radio"] {
 
 footer {
   padding: 8px;
-  text-align: center;
+  text-align: center;  
 }
 
 .question-col {
   width: 100%;
   background-color: #0F508A;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .chart-container {
@@ -91,4 +95,11 @@ footer {
   width: 100%;
   max-width: 100vw;
   max-height: 100vw;
+}
+
+.ltu-container {
+  background-color: #083258;
+  width: 100%;
+  position: sticky;
+  top: 0;
 }

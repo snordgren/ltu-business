@@ -35,7 +35,7 @@ const generateData = values => [
     subject: 'Dynamisk effektivitet', A: sumObjects(7)
   },
   {
-    subject: 'Hårdmjuka stårning', A: sumObjects(8)
+    subject: 'Hårdmjuk styrning', A: sumObjects(8)
   },
   {
     subject: 'Tältorganisation', A: sumObjects(9)
@@ -100,13 +100,17 @@ const Question = (question, reRender, questionIndex) => {
 }
 
 function App(reRender) {
+  const basePct = 15; // initial percentage, required so we can see the percentage
+
   return (
     <>
-      <h1 className="ltu-business-title">LTU Business</h1>
-      <div className="progress-container">
-        <ProgressBar
-          now={5 + 95 * answerCount / questions.length}
-          label={answerCount + "/" + questions.length} />
+      <div className="ltu-container">
+        <h1 className="ltu-business-title">LTU Business</h1>
+        <div className="progress-container">
+          <ProgressBar
+            now={basePct + (100 - basePct) * answerCount / questions.length}
+            label={answerCount + "/" + questions.length} />
+        </div>
       </div>
       <div className="question-col">
         {questions.map((question, questionIndex) => Question(question, reRender, questionIndex))}
