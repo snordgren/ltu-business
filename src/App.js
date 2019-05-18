@@ -87,13 +87,18 @@ const Question = (question, reRender, questionIndex) => {
     <div className="question-container">
       <h2 className="question-title">{question.title}</h2>
       <form className="question-form">
-        {question.answers.map(answer => (
-          <div>
-            <input type="radio" name={"question-num-" + questionIndex}
+        {question.answers.map((answer, answerIndex) => {
+          const radioBtnName = "question-num-" + questionIndex;
+          const radioBtnId = 'answer-' + questionIndex + '-' + answerIndex;
+          return (<div>
+            <input type="radio" name={radioBtnName} id={radioBtnId}
               onClick={() => applyAnswer(question, answer, reRender, questionIndex)} />
-            <span>{answer.text}</span>
-          </div>
-        ))}
+            <span onClick={() => {
+              applyAnswer(question, answer, reRender, questionIndex);
+              document.getElementById(radioBtnId).checked = true;
+            }}>{answer.text}</span>
+          </div>);
+        })}
       </form>
     </div>
   );
