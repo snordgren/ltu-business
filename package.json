@@ -9,7 +9,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
     "react-svg-radar-chart": "^1.2.0",
-    "recharts": "^1.5.0"
+    "recharts": "^1.5.0",
+    "stickyfilljs": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -109,7 +109,7 @@ function App(reRender) {
 
   return (
     <>
-      <div className="ltu-container">
+      <div className="ltu-container sticky">
         <h1 className="ltu-business-title">LTU Business</h1>
         <div className="progress-container">
           <ProgressBar
